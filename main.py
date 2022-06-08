@@ -46,17 +46,6 @@ def mostrar_todos():
         print(row[0],row[1],row[2],row[3],round(row[4],2))
 
 
-def comparacion():
-    id_comparar = int(input("Ingrese la ID a comparar: "))
-    query = f"SELECT * FROM tipo WHERE ID = {id_comparar}"
-    rows_query = run_query(query)
-    dws = 1.80
-    for row in rows_query:
-        if row[2] > dws:
-            print("La diferencia es: ",(round((row[2] - dws),2))*100," centíemtros")
-        else:
-            print("La diferencia es de: ",(round((dws - row[2]),2))*100," centíemtros")
-
 
 def menu():
     print("""\nSelecciones una acción:\n
@@ -66,15 +55,14 @@ def menu():
           4 ELIMINAR UN DATO
           5 MOSTRAR UN REGISTRO 
           6 MOSTRAR TODOS LOS REGISTROS
-          7 COMPARAR
-          8 SALIR
+          7 SALIR
           """)
       
 if __name__ == '__main__':
     conexionBBDD()
     while True:
         opcion = int(input("Ingrese una opción: "))
-        list_op = [1,2,3,4,5,6,7,8]
+        list_op = [1,2,3,4,5,6,7]
         if opcion in list_op:
             if opcion == 1:
                 menu()
@@ -88,9 +76,7 @@ if __name__ == '__main__':
                 mostrar_dato()
             if opcion == 6:
                 mostrar_todos()
-            if opcion ==7:
-                comparacion()
-            if opcion ==8:
+            if opcion == 7:
                 print("Programa finalizado")
                 break
         else:
