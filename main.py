@@ -7,7 +7,7 @@ def ingresar_dato():
     nombre = input('Ingrese el nombre: ')
     altura = float(input('Ingrese la altura: '))
     peso = float(input('Ingrese el peso: '))
-    imc = peso/(altura*altura)
+    imc = round(peso/(altura*altura),2)
     query = "INSERT INTO tipo (nombre,altura,peso,IMC) VALUES (?,?,?,?)"
     parameters = (nombre,altura,peso,imc)
     print("Datos ingresados")
@@ -42,8 +42,16 @@ def mostrar_dato():
 def mostrar_todos():
     query = "SELECT * FROM tipo"
     rows_query = run_query(query)
+
+    print("+-------------------------------------+")
+    print("ID  NOMBRE          ALTURA PESO IMC")
+    print("+-------------------------------------+")
+
     for row in rows_query:
-        print(row[0],row[1],row[2],row[3],round(row[4],2))
+        id,nombre,altura,peso,imc = row[0],row[1],row[2],row[3],row[4]
+        string = "|{:<3}|{:<15}|{:<5}|{:<5}|{:<4}|".format(id,nombre,altura,peso,imc)
+        print(string)
+        print('-'*39)
 
 
 
@@ -60,6 +68,7 @@ def menu():
       
 if __name__ == '__main__':
     conexionBBDD()
+    menu()
     while True:
         opcion = int(input("Ingrese una opción: "))
         list_op = [1,2,3,4,5,6,7]

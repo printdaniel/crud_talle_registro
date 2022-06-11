@@ -12,7 +12,6 @@ def run_query(query, parameters = ()):
 def conexionBBDD():
     miConexion = sqlite3.connect('database.db')
     miCursor = miConexion.cursor()
-
     try: 
         miCursor.execute('''
             CREATE TABLE tipo(
