@@ -20,6 +20,13 @@ class RegistroImc:
     
     def eliminar_dato(self):
         id_eliminar = int(input("Ingrese id de campo que desea elminar: "))
+        id_elim = f'SELECT ID FROM talle WHERE ID = {id_eliminar}'
+        
+        if list(run_query(id_elim)) == []:
+            print("EL ID elegido no corresponde a un dato de la tabla")
+            time.sleep(1)
+            print("Por favor elija un ID válido")
+            return self.eliminar_dato()
         query = f'DELETE FROM talle WHERE ID = {id_eliminar}'
         run_query(query)
     
@@ -27,6 +34,7 @@ class RegistroImc:
     def actulizar_dato(self):
         id_actualizar = int(input("Ingrese el ID que desea actualizar: "))
         old_id = f'SELECT ID FROM talle WHERE ID={id_actualizar}'
+        
         if list(run_query(old_id)) == []:
             print("El ID elegido no corresponde a un dato existente")
             time.sleep(2)
@@ -71,6 +79,8 @@ class RegistroImc:
               6 MOSTRAR TODOS LOS REGISTROS
               7 SALIR
               """)
+    
+
     def main(self):
         self.menu()
         while True:
@@ -95,6 +105,7 @@ class RegistroImc:
             else:
                 print("elija una opción del 1 al 7")
                 opcion = int(input("Ingrese una opción: "))
+
 
 if __name__ == '__main__':
     RegistroImc()
