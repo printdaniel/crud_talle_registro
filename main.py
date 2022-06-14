@@ -1,9 +1,11 @@
 import sqlite3
+import time
 from bbdd import run_query,conexionBBDD
 
 class RegistroImc:
     def __init__(self):
         self.main()
+
 
     def ingresar_dato(self):
         nombre = input('Ingrese el nombre: ')
@@ -24,6 +26,12 @@ class RegistroImc:
     
     def actulizar_dato(self):
         id_actualizar = int(input("Ingrese el ID que desea actualizar: "))
+        old_id = f'SELECT ID FROM talle WHERE ID={id_actualizar}'
+        if list(run_query(old_id)) == []:
+            print("El ID elegido no corresponde a un dato existente")
+            time.sleep(2)
+            return self.actulizar_dato()
+
         n_nombre = input('Ingrese el nombre: ')
         n_altura = float(input('Ingrese la altura: '))
         n_peso = int(input('Ingrese el peso: '))
@@ -85,7 +93,7 @@ class RegistroImc:
                     print("Programa finalizado")
                     break
             else:
-                print("elija una opción del 1 al 8")
+                print("elija una opción del 1 al 7")
                 opcion = int(input("Ingrese una opción: "))
 
 if __name__ == '__main__':
