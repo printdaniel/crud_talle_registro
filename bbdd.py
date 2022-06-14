@@ -10,11 +10,11 @@ def run_query(query, parameters = ()):
 
 
 def conexionBBDD():
-    miConexion = sqlite3.connect('database.db')
+    miConexion = sqlite3.connect(MI_BASE)
     miCursor = miConexion.cursor()
     try: 
         miCursor.execute('''
-            CREATE TABLE tipo(
+            CREATE TABLE talle(
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre VARCHAR(50),
             altura FLOAT NOT NULL,
@@ -24,4 +24,6 @@ def conexionBBDD():
         print('BASE DE DATOS creada exitosamente')
     except:
         print('Conexión exitosa con la base de datos')
+
+conexionBBDD()
 
